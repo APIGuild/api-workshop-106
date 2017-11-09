@@ -1,3 +1,7 @@
+ext {
+    PACT_DIR = "../pacts"
+}
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -12,5 +16,5 @@ dependencies {
     compileOnly('org.projectlombok:lombok:1.16.18')
     runtime('org.springframework.boot:spring-boot-devtools')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('au.com.dius.pact-jvm-consumer-junit_2.11:2.1.12')
+    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.1')
 }
