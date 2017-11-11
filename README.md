@@ -88,3 +88,13 @@ You can access the two endpoints once you start the services:
     ```
 
  5. Run your test, it will generate a pact file under '/target/pacts' directory
+
+ ## Provider - User service
+ 1. Add pact gradle plugin
+    ```
+    plugins {
+        id "au.com.dius.pact" version "3.2.11"
+    }
+    ```
+ 2. Define the pacts between your consumers and providers
+

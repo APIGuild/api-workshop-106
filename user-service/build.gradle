@@ -1,7 +1,27 @@
+plugins {
+	id "au.com.dius.pact" version "3.2.11"
+}
+
+apply plugin: 'au.com.dius.pact'
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-sleuth')
 	compile('org.springframework.cloud:spring-cloud-starter-zipkin')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('au.com.dius:pact-jvm-provider_2.10:3.2.11')
+}
+
+pact {
+	serviceProviders {
+		userProvider {
+			protocol = 'http'
+			host = 'localhost'
+			port = 8081
+			hasPactsWith('orderService') {
+				pactFileLocation = file('../order-service/target/pacts')
+			}
+		}
+	}
 }
