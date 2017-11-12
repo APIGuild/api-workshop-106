@@ -1,0 +1,11 @@
+package com.guild.api.demo.model;
+
+public class Product {
+    private final String id;
+    private final String name;
+
+    public Product(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
