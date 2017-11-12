@@ -50,7 +50,7 @@ You can access the two endpoints once you start the services:
         PACT_DIR = "../pacts"
     }
 
-    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.1')
+    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.11')
 
     ```
     
