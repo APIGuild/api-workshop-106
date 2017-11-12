@@ -15,7 +15,7 @@ dependencies {
 
 pact {
 	serviceProviders {
-		userProvider {
+		userService {
 			protocol = 'http'
 			host = 'localhost'
 			port = 8081

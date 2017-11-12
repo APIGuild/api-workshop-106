@@ -57,12 +57,12 @@ You can access the two endpoints once you start the services:
  2. Add the Pact Rule to your test class to represent your provider.
     ```
     @Rule
-    public PactProviderRule mockProvider = new PactProviderRule("user_provider", this);
+    public PactProviderRule mockProvider = new PactProviderRule("user_service", this);
 
     ```
  3. Annotate a method with Pact that returns a pact fragment for the provider and consumer
     ```
-    @Pact(provider="user_provider", consumer="order_service")
+    @Pact(provider="user_service", consumer="order_service")
         public PactFragment createPact(PactDslWithProvider builder) {
             return builder
                     .given("test state")
@@ -78,7 +78,7 @@ You can access the two endpoints once you start the services:
  4. Annotate your test method with PactVerification and write your test inside
     ```
      @Test
-     @PactVerification("user_provider")
+     @PactVerification("user_service")
      public void runTest() throws DaoException {
          given(restTemplateExecutor.getEndpointProperties()).willReturn(restEndpointProperties);
          given(restEndpointProperties.getBaseUrl()).willReturn("http://localhost:8081/user-service");
@@ -100,7 +100,7 @@ You can access the two endpoints once you start the services:
     ```
     pact {
     	serviceProviders {
-    		userProvider {
+    		userService {
     			protocol = 'http'
     			host = 'localhost'
     			port = 8081

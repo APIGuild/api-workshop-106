@@ -45,10 +45,10 @@ public class UserProviderGetUserPactTest {
         initMocks(this);
     }
     @Rule
-    public PactProviderRule mockProvider = new PactProviderRule("user_provider", "localhost", 8081, this);
+    public PactProviderRule mockProvider = new PactProviderRule("user_service", "localhost", 8081, this);
 
 
-    @Pact(provider="user_provider", consumer="order_service")
+    @Pact(provider="user_service", consumer="order_service")
     public PactFragment createPact(PactDslWithProvider builder) {
         expectedResult = new PactDslJsonBody()
                 .stringType("id")
@@ -66,7 +66,7 @@ public class UserProviderGetUserPactTest {
     }
 
     @Test
-    @PactVerification("user_provider")
+    @PactVerification("user_service")
     public void runTest() throws DaoException {
         given(restTemplateExecutor.getEndpointProperties()).willReturn(restEndpointProperties);
         given(restEndpointProperties.getBaseUrl()).willReturn("http://localhost:8081/user-service");
