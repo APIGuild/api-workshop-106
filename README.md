@@ -97,4 +97,18 @@ You can access the two endpoints once you start the services:
     }
     ```
  2. Define the pacts between your consumers and providers
-
+    ```
+    pact {
+    	serviceProviders {
+    		userProvider {
+    			protocol = 'http'
+    			host = 'localhost'
+    			port = 8081
+    			hasPactsWith('orderService') {
+    				pactFileLocation = file('../order-service/target/pacts')
+    			}
+    		}
+    	}
+    }
+    ```
+ 3. Execute `gradle pactVerify`
