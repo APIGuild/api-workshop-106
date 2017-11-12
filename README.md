@@ -37,7 +37,7 @@ http://localhost:8080/order-service/orders/1234567890
 
 ```
 
-## Comsumer
+## Consumer
 
 You can access the two endpoints once you start the services:
 - [http://localhost:8080/order-service/orders/1234567890](http://localhost:8080/order-service/orders/1234567890)
@@ -112,3 +112,24 @@ You can access the two endpoints once you start the services:
     }
     ```
  3. Execute `gradle pactVerify`
+
+##Pact Broker
+
+ ###Publishing pact files to a pact broker
+
+    The pact gradle plugin provides a pactPublish task that can publish all pact files in a directory to a pact broker.
+    ```
+    pact {
+
+        publish {
+            pactDirectory = '/pact/dir' // defaults to $buildDir/pacts
+            pactBrokerUrl = 'http://pactbroker:1234'
+        }
+
+    }
+    ```
+ ###Verifying pact files from a pact broker
+    To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
+    ```
+    hasPactsFromPactBroker('http://pact-broker:5000/')
+    ```
