@@ -8,4 +8,12 @@ public class Logistics {
         this.id = id;
         this.logistics = logistics;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getLogistics() {
+        return logistics;
+    }
 }

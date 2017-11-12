@@ -104,8 +104,8 @@ You can access the two endpoints once you start the services:
     			protocol = 'http'
     			host = 'localhost'
     			port = 8081
-    			hasPactsWith('orderService') {
-    				pactFileLocation = file('../order-service/target/pacts')
+    			hasPactWith('orderService') {
+    				pactFile = file('../order-service/target/pacts/order_service-user_service.json')
     			}
     		}
     	}

@@ -2,8 +2,6 @@ plugins {
 	id "au.com.dius.pact" version "3.2.11"
 }
 
-apply plugin: 'au.com.dius.pact'
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-sleuth')
@@ -19,8 +17,8 @@ pact {
 			protocol = 'http'
 			host = 'localhost'
 			port = 8081
-			hasPactsWith('orderService') {
-				pactFileLocation = file('../order-service/target/pacts')
+			hasPactWith('orderService') {
+				pactFile = file('../order-service/target/pacts/order_service-user_service.json')
 			}
 		}
 	}
