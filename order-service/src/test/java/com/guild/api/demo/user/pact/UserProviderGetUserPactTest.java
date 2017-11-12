@@ -51,13 +51,12 @@ public class UserProviderGetUserPactTest {
     @Pact(provider="user_provider", consumer="order_service")
     public PactFragment createPact(PactDslWithProvider builder) {
         expectedResult = new PactDslJsonBody()
-                .id()
-                .stringType("Id")
-                .stringType("Name")
+                .stringType("id")
+                .stringType("name")
                 .asBody();
 
         return builder
-                .uponReceiving("get hello world response")
+                .uponReceiving("Get user info response")
                 .path("/user-service/users/12345")
                 .method("GET")
                 .willRespondWith()
