@@ -113,7 +113,7 @@ You can access the two endpoints once you start the services:
     ```
  3. Execute `gradle pactVerify`
 
-##Pact Broker
+## Pact Broker
 
  ###Publishing pact files to a pact broker
 
@@ -128,7 +128,7 @@ You can access the two endpoints once you start the services:
 
     }
     ```
- ###Verifying pact files from a pact broker
+ ### Verifying pact files from a pact broker
     To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
     ```
     hasPactsFromPactBroker('http://pact-broker:5000/')
