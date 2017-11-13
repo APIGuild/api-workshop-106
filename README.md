@@ -115,9 +115,9 @@ You can access the two endpoints once you start the services:
 
 ## Pact Broker
 
- ###Publishing pact files to a pact broker
+ ### Publishing pact files to a pact broker
 
-    The pact gradle plugin provides a pactPublish task that can publish all pact files in a directory to a pact broker.
+ The pact gradle plugin provides a pactPublish task that can publish all pact files in a directory to a pact broker.
     ```
     pact {
 
@@ -129,7 +129,7 @@ You can access the two endpoints once you start the services:
     }
     ```
  ### Verifying pact files from a pact broker
-    To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
+ To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
     ```
     hasPactsFromPactBroker('http://pact-broker:5000/')
     ```
