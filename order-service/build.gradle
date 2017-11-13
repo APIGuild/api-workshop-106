@@ -23,7 +23,7 @@ pact {
 
     publish {
         pactDirectory = 'order-service/target/pacts'
-        pactBrokerUrl = 'https://GjFVxhIIdgoBAPnc0vQLP31r5ulbTJLM:sooYoAk3dKoZs1KTwo5cdEGwPUlBT@thoughtworks.pact.dius.com.au'
+        pactBrokerUrl = 'http://localhost:8088/'
     }
 
 }

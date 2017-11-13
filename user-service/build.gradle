@@ -13,13 +13,11 @@ dependencies {
 
 pact {
 	serviceProviders {
-		userService {
+		user_service {
 			protocol = 'http'
 			host = 'localhost'
 			port = 8081
-			hasPactWith('orderService') {
-				pactFile = file('../order-service/target/pacts/order_service-user_service.json')
-			}
+			hasPactsFromPactBroker('http://localhost:8088')
 		}
 	}
 }

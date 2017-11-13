@@ -111,9 +111,27 @@ You can access the two endpoints once you start the services:
     	}
     }
     ```
- 3. Execute `./gradlew pactVerify`
+ 3. Execute `./gradlew :user-service:pactVerify`
 
 ## Pact Broker
+ ### Set up pact broker
+ You can use the [Pact Broker Docker container](https://hub.docker.com/r/dius/pact-broker/) or [Terraform on AWS](https://github.com/nadnerb/terraform-pact-broker) or to roll your own...
+ 
+ - Install postgresql. Follow the instruction [here](https://github.com/DiUS/pact_broker-docker/blob/master/POSTGRESQL.md#installation-of-non-docker-postgresql).
+ - Create a PostgreSQL (recommended) or MySQL (not recommended, see following note) database.
+    ```
+    $ psql postgres
+    > create database pact_broker;
+    > CREATE USER pact_broker WITH PASSWORD 'pact_broker';
+    > GRANT ALL PRIVILEGES ON DATABASE pact_broker to pact_broker;
+
+ - Install ruby 2.2.0 or later `brew install ruby` and bundler >= 1.12.0 `gem install bundler`
+ - `cd pact-broker`
+ - Modify the config.ru and Gemfile as desired (eg. choose database driver gem, set your database credentials. Use the "pg" gem if using Postgres.)
+ - Please ensure you use encoding: 'utf8' in your Sequel options to avoid encoding issues.
+ - run `bundle`
+ - run `bundle exec rackup -p 8088`
+ - open [http://localhost:8088](http://localhost:8088)
 
  ### Publishing pact files to a pact broker
 
@@ -123,14 +141,15 @@ You can access the two endpoints once you start the services:
 
         publish {
             pactDirectory = '/pact/dir' // defaults to $buildDir/pacts
-            pactBrokerUrl = 'http://pactbroker:1234'
+            pactBrokerUrl = 'http://localhost:8088'
         }
 
     }
     
- Execute `./gradlew pactPublish` 
+ Execute `./gradlew :order-service:pactPublish` 
+ 
  ### Verifying pact files from a pact broker
  To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
     ```
-    hasPactsFromPactBroker('http://pact-broker:5000/')
+    hasPactsFromPactBroker('http://localhost:8088')
     ```
