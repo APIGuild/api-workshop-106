@@ -111,14 +111,14 @@ You can access the two endpoints once you start the services:
     	}
     }
     ```
- 3. Execute `gradle pactVerify`
+ 3. Execute `./gradlew pactVerify`
 
 ## Pact Broker
 
  ### Publishing pact files to a pact broker
 
  The pact gradle plugin provides a pactPublish task that can publish all pact files in a directory to a pact broker.
-    ```
+
     pact {
 
         publish {
@@ -127,7 +127,8 @@ You can access the two endpoints once you start the services:
         }
 
     }
-    ```
+    
+ Execute `./gradlew pactPublish` 
  ### Verifying pact files from a pact broker
  To set up the validate against the pacts stored in a pact broker, replace the pactLocation in provider with:
     ```

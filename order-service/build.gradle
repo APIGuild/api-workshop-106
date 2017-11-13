@@ -1,5 +1,5 @@
-ext {
-    PACT_DIR = "../pacts"
+plugins {
+    id "au.com.dius.pact" version "3.2.13"
 }
 
 dependencies {
@@ -16,5 +16,14 @@ dependencies {
     compileOnly('org.projectlombok:lombok:1.16.18')
     runtime('org.springframework.boot:spring-boot-devtools')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.11')
+    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.13')
+}
+
+pact {
+
+    publish {
+        pactDirectory = 'order-service/target/pacts'
+        pactBrokerUrl = 'https://GjFVxhIIdgoBAPnc0vQLP31r5ulbTJLM:sooYoAk3dKoZs1KTwo5cdEGwPUlBT@thoughtworks.pact.dius.com.au'
+    }
+
 }
