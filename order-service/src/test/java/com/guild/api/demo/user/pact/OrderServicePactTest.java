@@ -68,7 +68,7 @@ public class OrderServicePactTest {
     public PactProviderRule mockLogisticService = new PactProviderRule("logistics_service", "localhost", 8082, this);
 
 
-    @Pact(provider="userService", consumer="order_service")
+    @Pact(provider="user_service", consumer="order_service")
     public PactFragment createUserPact(PactDslWithProvider builder) {
         expectedUserResponse = new PactDslJsonBody()
                 .stringType("id")

@@ -1,4 +1,4 @@
-# API Capability Building Workshop - Contract Test
+# API Capability Building Workshop - Contract Testing
 
 ## Setup
 
@@ -50,7 +50,7 @@ You can access the two endpoints once you start the services:
         PACT_DIR = "../pacts"
     }
 
-    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.2.11')
+    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.5.8')
 
     ```
     
@@ -93,7 +93,7 @@ You can access the two endpoints once you start the services:
  1. Add pact gradle plugin
     ```
     plugins {
-        id "au.com.dius.pact" version "3.2.11"
+        id "au.com.dius.pact" version "3.5.8"
     }
     ```
  2. Define the pacts between your consumers and providers
