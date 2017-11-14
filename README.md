@@ -87,7 +87,7 @@ You can access the two endpoints once you start the services:
          given(restTemplateExecutor.getEndpointProperties()).willReturn(restEndpointProperties);
          given(restEndpointProperties.getBaseUrl()).willReturn("http://localhost:8081/user-service");
          UserModel user = userDao.getUser("12345");
-         assertEquals(user.getDescription(), expectedResult.toString());
+         assertEquals(user.getDescription(), expectedUserResponse.toString());
      }
     ```
 
