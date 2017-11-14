@@ -57,21 +57,25 @@ You can access the two endpoints once you start the services:
  2. Add the Pact Rule to your test class to represent your provider.
     ```
     @Rule
-    public PactProviderRule mockProvider = new PactProviderRule("user_service", this);
+        public PactProviderRule mockUserService = new PactProviderRule("user_service", "localhost", 8081, this);
 
     ```
  3. Annotate a method with Pact that returns a pact fragment for the provider and consumer
     ```
     @Pact(provider="user_service", consumer="order_service")
-        public PactFragment createPact(PactDslWithProvider builder) {
+        public PactFragment createUserPact(PactDslWithProvider builder) {
+            expectedUserResponse = new PactDslJsonBody()
+                    .stringType("id")
+                    .stringType("name")
+                    .asBody();
+    
             return builder
-                    .given("test state")
-                    .uponReceiving("ExampleJavaConsumerPactRuleTest test interaction")
-                    .path("/")
+                    .uponReceiving("Get user info response")
+                    .path("/user-service/users/12345")
                     .method("GET")
                     .willRespondWith()
                     .status(200)
-                    .body("{\"responsetest\": true}")
+                    .body(expectedUserResponse)
                     .toFragment();
         }
     ```
