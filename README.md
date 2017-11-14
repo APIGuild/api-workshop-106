@@ -104,7 +104,7 @@ You can access the two endpoints once you start the services:
     ```
     pact {
     	serviceProviders {
-    		userService {
+    		user-service {
     			protocol = 'http'
     			host = 'localhost'
     			port = 8081
