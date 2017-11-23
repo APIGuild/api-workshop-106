@@ -2,11 +2,11 @@ package com.guild.api.demo.user.pact;
 
 
 import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactProviderRule;
+import au.com.dius.pact.consumer.PactProviderRuleMk2;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
-import au.com.dius.pact.model.PactFragment;
+import au.com.dius.pact.model.RequestResponsePact;
 import com.guild.api.demo.dao.LogisticsDao;
 import com.guild.api.demo.dao.ProductDao;
 import com.guild.api.demo.dao.UserDao;
@@ -59,20 +59,20 @@ public class OrderServicePactTest {
     }
 
     @Rule
-    public PactProviderRule mockUserService = new PactProviderRule("user_service", "localhost", 8081, this);
+    public PactProviderRuleMk2 mockUserService = new PactProviderRuleMk2("user_service", "localhost", 8081, this);
 
     @Rule
-    public PactProviderRule mockProductService = new PactProviderRule("product_service", "localhost", 8083, this);
+    public PactProviderRuleMk2 mockProductService = new PactProviderRuleMk2("product_service", "localhost", 8083, this);
 
     @Rule
-    public PactProviderRule mockLogisticService = new PactProviderRule("logistics_service", "localhost", 8082, this);
+    public PactProviderRuleMk2 mockLogisticService = new PactProviderRuleMk2("logistics_service", "localhost", 8082, this);
 
 
     @Pact(provider="user_service", consumer="order_service")
-    public PactFragment createUserPact(PactDslWithProvider builder) {
+    public RequestResponsePact createUserPact(PactDslWithProvider builder) {
         expectedUserResponse = new PactDslJsonBody()
-                .stringType("id")
-                .stringType("name")
+                .stringType("id", "12345")
+                .stringType("name", "James")
                 .asBody();
 
         return builder
@@ -82,14 +82,14 @@ public class OrderServicePactTest {
                 .willRespondWith()
                 .status(200)
                 .body(expectedUserResponse)
-                .toFragment();
+                .toPact();
     }
 
     @Pact(provider="product_service", consumer="order_service")
-    public PactFragment createProductPact(PactDslWithProvider builder) {
+    public RequestResponsePact createProductPact(PactDslWithProvider builder) {
         expectedProductResponse = new PactDslJsonBody()
-                .stringType("id")
-                .stringType("name")
+                .stringType("id", "12345")
+                .stringType("name", "Mac Pro")
                 .asBody();
 
         return builder
@@ -99,14 +99,14 @@ public class OrderServicePactTest {
                 .willRespondWith()
                 .status(200)
                 .body(expectedProductResponse)
-                .toFragment();
+                .toPact();
     }
 
     @Pact(provider="logistics_service", consumer="order_service")
-    public PactFragment createLogisticPact(PactDslWithProvider builder) {
+    public RequestResponsePact createLogisticPact(PactDslWithProvider builder) {
         expectedLogisticsResponse = new PactDslJsonBody()
-                .stringType("id")
-                .stringType("logistics")
+                .stringType("id", "12345")
+                .stringType("logistics", "sf-express")
                 .asBody();
 
         return builder
@@ -116,7 +116,7 @@ public class OrderServicePactTest {
                 .willRespondWith()
                 .status(200)
                 .body(expectedLogisticsResponse)
-                .toFragment();
+                .toPact();
     }
 
     @Test

@@ -56,17 +56,17 @@ You can access the two endpoints once you start the services:
     
  2. Add the Pact Rule to your test class to represent your provider.
     ```
-    @Rule
-        public PactProviderRule mockUserService = new PactProviderRule("user_service", "localhost", 8081, this);
+     @Rule
+        public PactProviderRuleMk2 mockUserService = new PactProviderRuleMk2("user_service", "localhost", 8081, this);
 
     ```
  3. Annotate a method with Pact that returns a pact fragment for the provider and consumer
     ```
     @Pact(provider="user_service", consumer="order_service")
-        public PactFragment createUserPact(PactDslWithProvider builder) {
+        public RequestResponsePact createUserPact(PactDslWithProvider builder) {
             expectedUserResponse = new PactDslJsonBody()
-                    .stringType("id")
-                    .stringType("name")
+                    .stringType("id", "12345")
+                    .stringType("name", "James")
                     .asBody();
     
             return builder
@@ -76,7 +76,7 @@ You can access the two endpoints once you start the services:
                     .willRespondWith()
                     .status(200)
                     .body(expectedUserResponse)
-                    .toFragment();
+                    .toPact();
         }
     ```
  4. Annotate your test method with PactVerification and write your test inside
@@ -104,12 +104,12 @@ You can access the two endpoints once you start the services:
     ```
     pact {
     	serviceProviders {
-    		userService {
+    		user_service {
     			protocol = 'http'
     			host = 'localhost'
     			port = 8081
     			hasPactWith('orderService') {
-    				pactFile = file('../order-service/target/pacts/order_service-user_service.json')
+    				pactSource = file('../order-service/target/pacts/order_service-user_service.json')
     			}
     		}
     	}
@@ -140,14 +140,16 @@ You can access the two endpoints once you start the services:
  ### Publishing pact files to a pact broker
 
  The pact gradle plugin provides a pactPublish task that can publish all pact files in a directory to a pact broker.
+ 
+ Add following code in order-service.gradle:
 
     pact {
-
+    
         publish {
-            pactDirectory = '/pact/dir' // defaults to $buildDir/pacts
-            pactBrokerUrl = 'http://localhost:8088'
+            pactDirectory = 'order-service/target/pacts'
+            pactBrokerUrl = 'http://localhost:8088/'
         }
-
+    
     }
     
  Execute `./gradlew :order-service:pactPublish` 
